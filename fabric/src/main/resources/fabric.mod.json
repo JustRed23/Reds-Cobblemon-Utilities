@@ -18,5 +18,8 @@
   "depends": {
     "minecraft": "1.21.1",
     "cobblemon": ">=1.6.0"
-  }
+  },
+  "mixins": [
+    "redscobblemonutilities-common.mixins.json"
+  ]
 }

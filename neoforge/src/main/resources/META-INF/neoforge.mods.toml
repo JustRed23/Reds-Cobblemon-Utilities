@@ -13,6 +13,9 @@ Some much needed improvements to the Cobblemon experience.
 '''
 #logoFile = ""
 
+[[mixins]]
+config = "redscobblemonutilities-common.mixins.json"
+
 [[dependencies.redscobblemonutilities]]
 modId = "minecraft"
 mandatory = true
