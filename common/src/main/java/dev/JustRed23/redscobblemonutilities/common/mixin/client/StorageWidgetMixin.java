@@ -5,6 +5,9 @@ import com.cobblemon.mod.common.CobblemonSounds;
 import com.cobblemon.mod.common.api.storage.StorePosition;
 import com.cobblemon.mod.common.api.storage.party.PartyPosition;
 import com.cobblemon.mod.common.api.storage.pc.PCPosition;
+import com.cobblemon.mod.common.client.gui.pc.BoxStorageSlot;
+import com.cobblemon.mod.common.client.gui.pc.PartyStorageSlot;
+import com.cobblemon.mod.common.client.gui.pc.StorageSlot;
 import com.cobblemon.mod.common.client.gui.pc.StorageWidget;
 import com.cobblemon.mod.common.client.storage.ClientParty;
 import com.cobblemon.mod.common.net.messages.server.storage.party.ReleasePartyPokemonPacket;
@@ -12,6 +15,7 @@ import com.cobblemon.mod.common.net.messages.server.storage.pc.ReleasePCPokemonP
 import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.JustRed23.redscobblemonutilities.common.client.gui.QuickReleaseButton;
+import dev.JustRed23.redscobblemonutilities.common.utils.Stats;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.sounds.SoundEvent;
 import org.spongepowered.asm.mixin.Final;
@@ -94,6 +98,35 @@ public abstract class StorageWidgetMixin {
             CobblemonNetwork.INSTANCE.sendToServer(packetToSend);
             playSound(CobblemonSounds.PC_RELEASE);
             ci.cancel();
+        }
+    }
+
+    @Inject(
+            method = "renderWidget",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcom/cobblemon/mod/common/client/gui/pc/BoxStorageSlot;isHovered(II)Z"
+            )
+    )
+    private void redscobblemonutilities$renderBoxSlotIVs(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci, @Local BoxStorageSlot slot, @Local Pokemon pokemon) {
+        this.renderIVs(context, mouseX, mouseY, slot, pokemon);
+    }
+
+    @Inject(
+            method = "renderWidget",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcom/cobblemon/mod/common/client/gui/pc/PartyStorageSlot;isHovered(II)Z"
+            )
+    )
+    private void redscobblemonutilities$renderPartySlotIVs(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci, @Local PartyStorageSlot slot, @Local Pokemon pokemon) {
+        this.renderIVs(context, mouseX, mouseY, slot, pokemon);
+    }
+
+    private void renderIVs(GuiGraphics context, int mouseX, int mouseY, StorageSlot slot, Pokemon pokemon) {
+        if (pokemon != null  && slot.isHovered(mouseX, mouseY)) {
+            context.fill(mouseX, mouseY, mouseX + 134, mouseY + 148, 0x7F000000);
+            Stats.Companion.drawIVs(context.pose(), pokemon, mouseX, mouseY, 134, 148);
         }
     }
 }
