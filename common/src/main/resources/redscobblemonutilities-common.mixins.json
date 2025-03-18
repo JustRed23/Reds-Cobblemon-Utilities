@@ -5,5 +5,9 @@
   "minVersion": "0.8",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "client.StorageSlotMixin",
+    "client.StorageWidgetMixin"
+  ]
 }
