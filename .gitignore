@@ -1,0 +1,24 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+/.architectury-transformer/
+common/src/main/resources/assets/cobblemon/showdown
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "redscobblemonutilities",
+  "version": "${version}",
+  "name": "Red's Cobblemon Utilities",
+  "description": "Some much needed improvements to the Cobblemon experience.",
+  "authors": [
+    "JustRed23"
+  ],
+  "license": "MIT License",
+  "icon": "assets/example/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.JustRed23.redscobblemonutilities.fabric.RCUFabric"
+    ]
+  },
+  "depends": {
+    "minecraft": "1.21.1",
+    "cobblemon": ">=1.6.0"
+  }
+}
