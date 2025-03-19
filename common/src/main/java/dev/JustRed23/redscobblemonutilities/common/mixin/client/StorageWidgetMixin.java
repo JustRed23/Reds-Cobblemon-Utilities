@@ -28,7 +28,7 @@ import java.util.Objects;
 @Mixin(com.cobblemon.mod.common.client.gui.pc.StorageWidget.class)
 public abstract class StorageWidgetMixin {
 
-    private final StorageWidget redscobblemonutilities$instance = (StorageWidget) (Object) this;
+    @Unique private final StorageWidget redscobblemonutilities$instance = (StorageWidget) (Object) this;
 
     @Unique private QuickReleaseButton redscobblemonutilities$quickReleaseButton;
     @Shadow @Final private ClientParty party;
