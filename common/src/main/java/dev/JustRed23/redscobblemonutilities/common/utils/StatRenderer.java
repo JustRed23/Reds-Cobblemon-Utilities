@@ -55,9 +55,7 @@ public final class StatRenderer {
         final IVs ivs = pokemon.getIvs();
         int index = 0;
 
-        for (Map.Entry<Stat, MutableComponent> entry : IV_NAMES.entrySet()) {
-            Stat stat = entry.getKey();
-            MutableComponent name = entry.getValue();
+        for (Stat stat : Stats.Companion.getPERMANENT()) {
             int iv = Objects.requireNonNull(ivs.get(stat));
 
             int scaledWidth = (int) ((iv / (float) IV_MAX) * IV_BAR_WIDTH);
@@ -66,14 +64,14 @@ public final class StatRenderer {
             int ivColor = iv == IV_MAX ? 0xFF6a8ec3 : 0xFFB05CCC;
             int ivGradient = iv == IV_MAX ? 0xFF8ab9ff : 0xFFE080FF;
 
-            int barX = x + 19;
+            int barX = x + 18;
             int barY = y + 131 + (index * 12);
 
             context.fill(barX - 1, barY, barX + IV_BAR_WIDTH + 1, barY + IV_BAR_HEIGHT + 1, borderColor);
             context.fillGradient(barX, barY + 1, barX + scaledWidth, barY + IV_BAR_HEIGHT, ivGradient, ivColor);
 
             RenderHelperKt.drawScaledTextJustifiedRight(context, CobblemonResources.INSTANCE.getDEFAULT_LARGE(),
-                    name, barX - 2, barY, 0.5f, 1,
+                    IV_NAMES.get(stat), barX - 2, barY, 0.5f, 1,
                     100, 0xFFFFFFFF, false);
 
             RenderHelperKt.drawScaledText(context, CobblemonResources.INSTANCE.getDEFAULT_LARGE(),
