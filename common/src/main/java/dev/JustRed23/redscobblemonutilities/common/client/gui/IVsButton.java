@@ -1,18 +1,23 @@
 package dev.JustRed23.redscobblemonutilities.common.client.gui;
 
+import com.cobblemon.mod.common.api.gui.GuiUtilsKt;
 import com.cobblemon.mod.common.client.gui.CobblemonRenderable;
+import dev.JustRed23.redscobblemonutilities.common.RedsCobblemonUtilities;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
 
 public class IVsButton extends AbstractButton implements CobblemonRenderable {
 
-    private static final int BOX_SIZE = 6;
-    private static final int WIDTH = BOX_SIZE + 1, HEIGHT = BOX_SIZE + 1;
+    private static final ResourceLocation TEXTURE = RedsCobblemonUtilities.asResource("textures/gui/pc/iv_button.png");
+    private static final ResourceLocation TEXTURE_ACTIVE = RedsCobblemonUtilities.asResource("textures/gui/pc/iv_button_active.png");
+
+    private static final int WIDTH = 20, HEIGHT = 9;
 
     private final Button.CreateNarration narration = Supplier::get;
     private boolean active;
@@ -34,7 +39,19 @@ public class IVsButton extends AbstractButton implements CobblemonRenderable {
     }
 
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        //TODO
-        guiGraphics.fill(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight(), this.active ? 0xFF00FF00 : 0xFFFF0000);
+        GuiUtilsKt.blitk(
+                guiGraphics.pose(),
+                active ? TEXTURE_ACTIVE : TEXTURE,
+                getX(),
+                getY(),
+                getHeight(),
+                getWidth(),
+                0, 0,
+                getWidth(), getHeight(),
+                0,
+                1,1,1, 1,
+                true,
+                1
+        );
     }
 }

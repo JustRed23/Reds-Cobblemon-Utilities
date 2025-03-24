@@ -31,7 +31,7 @@ public class PCGUIMixin extends Screen {
     private void redscobblemonutilities$initIVsButton(CallbackInfo ci) {
         int x = (this.width - PCGUI.BASE_WIDTH) / 2;
         int y = (this.height - PCGUI.BASE_HEIGHT) / 2;
-        this.redscobblemonutilities$ivsButton = new IVsButton(x + 6, y + 118);
+        this.redscobblemonutilities$ivsButton = new IVsButton(x + 6, y + 117);
         this.addRenderableWidget(redscobblemonutilities$ivsButton);
     }
 
