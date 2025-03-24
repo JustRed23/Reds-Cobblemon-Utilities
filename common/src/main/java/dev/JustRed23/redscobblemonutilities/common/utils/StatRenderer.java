@@ -40,6 +40,8 @@ public final class StatRenderer {
     private static final int IV_BAR_WIDTH = 41;
     private static final int IV_BAR_HEIGHT = 4;
 
+    private static final IVs NULL_IVS;
+
     private static final Map<Stat, MutableComponent> IV_NAMES = Map.of(
             Stats.HP, lang("ui.stats.hp"),
             Stats.ATTACK, lang("ui.stats.atk"),
@@ -50,9 +52,7 @@ public final class StatRenderer {
     );
 
     private static void renderIVs(GuiGraphics context, int x, int y, Pokemon pokemon) {
-        if (pokemon == null) return;
-
-        final IVs ivs = pokemon.getIvs();
+        final IVs ivs = pokemon == null ? NULL_IVS : pokemon.getIvs();
         int index = 0;
 
         for (Stat stat : Stats.Companion.getPERMANENT()) {
@@ -84,4 +84,11 @@ public final class StatRenderer {
         }
     }
 
+    static {
+        NULL_IVS = new IVs();
+
+        for (Stat stat : Stats.Companion.getPERMANENT()) {
+            NULL_IVS.set(stat, 0);
+        }
+    }
 }
