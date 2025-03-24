@@ -33,6 +33,7 @@ public abstract class StorageWidgetMixin {
     @Unique private QuickReleaseButton redscobblemonutilities$quickReleaseButton;
     @Shadow @Final private ClientParty party;
     @Shadow protected abstract void playSound(SoundEvent sound);
+    @Shadow protected abstract void resetSelected();
 
     @Inject(
             method = "<init>",
@@ -93,6 +94,7 @@ public abstract class StorageWidgetMixin {
         if (packetToSend != null) {
             CobblemonNetwork.INSTANCE.sendToServer(packetToSend);
             playSound(CobblemonSounds.PC_RELEASE);
+            resetSelected();
             ci.cancel();
         }
     }
