@@ -53,16 +53,17 @@ public final class StatRenderer {
 
     private static void renderIVs(GuiGraphics context, int x, int y, Pokemon pokemon) {
         final IVs ivs = pokemon == null ? NULL_IVS : pokemon.getIvs();
+        final boolean isMax = StatComparer.Companion.isMax(ivs);
         int index = 0;
 
         for (Stat stat : Stats.Companion.getPERMANENT()) {
-            int iv = Objects.requireNonNull(ivs.get(stat));
+            int iv = ivs.getOrDefault(stat);
 
             int scaledWidth = (int) ((iv / (float) IV_MAX) * IV_BAR_WIDTH);
 
             int borderColor = 0xFF4B4B4B;
-            int ivColor = iv == IV_MAX ? 0xFF6a8ec3 : 0xFFB05CCC;
-            int ivGradient = iv == IV_MAX ? 0xFF8ab9ff : 0xFFE080FF;
+            int ivColor = iv == IV_MAX ? (isMax ? 0xFFF0C96B : 0xFF6a8ec3) : 0xFFB05CCC;
+            int ivGradient = iv == IV_MAX ? (isMax ? 0xFFEEDC82 : 0xFF8ab9ff) : 0xFFE080FF;
 
             int barX = x + 18;
             int barY = y + 131 + (index * 12);
