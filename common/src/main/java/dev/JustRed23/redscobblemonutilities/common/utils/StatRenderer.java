@@ -36,7 +36,7 @@ public final class StatRenderer {
         matrices.popPose();
     }
 
-    private static final int IV_MAX = 31;
+    private static final int IV_MAX = IVs.MAX_VALUE;
     private static final int IV_BAR_WIDTH = 41;
     private static final int IV_BAR_HEIGHT = 4;
 
